@@ -57,4 +57,16 @@ Subject.updateSubject = (id, subjectReqData, result) => {
     }
   })
 }
+// delete subject
+Subject.deleteSubject = (id, result) => {
+  dbCon.query('DELETE FROM subjects WHERE sub_id=?', [id], (err, res) => {
+    if(err) {
+      console.log('Error while deleting subject')
+      result(null, err)
+    }else {
+      console.log('Delete subject successfully')
+      result(null, res)
+    }
+  })
+}
 module.exports = Subject

@@ -53,3 +53,12 @@ exports.updateSubject = (req, res) => {
     })
   }
 }
+
+// delelte subject
+exports.deleteSubject = (req, res) => {
+  SubjectModel.deleteSubject(req.params.id, (err, subject) => {
+    if(err)
+    res.send(err)
+    res.json({ success: true, message: 'Deleted subject successfully'})
+  })
+}

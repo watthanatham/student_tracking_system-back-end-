@@ -10,5 +10,7 @@ router.get('/:id', subjectController.getSubjectById)
 router.post('/', subjectController.createNewSubject)
 // update subject
 router.put('/:id', subjectController.updateSubject)
+// delete subject
+router.delete('/:id', subjectController.deleteSubject)
 
 module.exports = router
