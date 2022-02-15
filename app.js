@@ -8,7 +8,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('Welcome to Informatics Result System')
+  res.send('Welcome to students tracking system')
 })
 
 // import routes
@@ -22,5 +22,5 @@ app.use('/subject', subjectRouter)
 
 
 app.listen(port, ()=> {
-  console.log('server is running...')
+  console.log('Server is running...')
 })

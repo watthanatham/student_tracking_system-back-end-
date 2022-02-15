@@ -1,12 +1,10 @@
-const res = require('express/lib/response')
-const dbConn = require('../../config/db.config')
 const SubjectModel = require('../models/Subject')
 
 // get all subjects
 exports.getAllSubjects = (req, res) => {
   //console.log('Get user successfully')
   SubjectModel.getAllSubjects((err, subject) => {
-    console.log('Get all subjects success fully')
+    console.log('Get all subjects successfully')
     if(err)
     res.send(err)
     console.log('Subjects', subject)
