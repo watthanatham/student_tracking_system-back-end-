@@ -16,5 +16,16 @@ Subject_Type.getAllTypes = (result) => {
     }
   })
 }
+Subject_Type.createNewType = (sub_typeReqdata, result) => {
+  dbCon.query('INSERT INTO subject_type SET ?', sub_typeReqdata, (err, res) => {
+    if(err) {
+      console.log('Error while inserting data')
+      result(null, err)
+    }else {
+      console.log('Insert new type successfully')
+      result(null, res)
+    }
+  })
+}
 // insert subject types
 module.exports = Subject_Type
