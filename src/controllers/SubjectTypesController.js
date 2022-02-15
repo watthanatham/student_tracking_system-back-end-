@@ -17,7 +17,7 @@ exports.createNewType = (req, res) => {
     res.send(400).send({success: false, message: 'Please fill data all fields'})
   }else {
     console.log('Valid data')
-    SubjectTypesModel.createNewType(sub_typeReqdata, (err,subject_type) => {
+    SubjectTypesModel.createNewType(sub_typeReqdata, (err, subject_type) => {
       if(err)
       res.send(err)
       res.json({ status: true, message: 'Insert type sucessfully', data: subject_type })
