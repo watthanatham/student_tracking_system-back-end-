@@ -2,7 +2,6 @@ const SubjectModel = require('../models/Subject')
 
 // get all subjects
 exports.getAllSubjects = (req, res) => {
-  //console.log('Get user successfully')
   SubjectModel.getAllSubjects((err, subject) => {
     console.log('Get all subjects successfully')
     if(err)

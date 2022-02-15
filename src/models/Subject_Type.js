@@ -17,3 +17,4 @@ Subject_Type.getAllTypes = (result) => {
   })
 }
 // insert subject types
+module.exports = Subject_Type

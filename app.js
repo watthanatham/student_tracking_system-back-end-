@@ -14,11 +14,13 @@ app.get('/', (req, res) => {
 // import routes
 const userRouter = require('./src/routes/user')
 const subjectRouter = require('./src/routes/subject')
+const subjecttypeRouter = require('./src/routes/subject_type')
 
 
 // create routes
 app.use('/users', userRouter)
 app.use('/subject', subjectRouter)
+app.use('/subject_type', subjecttypeRouter)
 
 
 app.listen(port, ()=> {
