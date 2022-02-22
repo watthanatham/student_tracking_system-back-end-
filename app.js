@@ -15,12 +15,14 @@ app.get('/', (req, res) => {
 const userRouter = require('./src/routes/user')
 const subjectRouter = require('./src/routes/subject')
 const subjecttypeRouter = require('./src/routes/subject_type')
+const courseRouter = require('./src/routes/course')
 
 
 // create routes
 app.use('/users', userRouter)
 app.use('/subject', subjectRouter)
 app.use('/subject_type', subjecttypeRouter)
+app.use('/course', courseRouter)
 
 
 app.listen(port, ()=> {
