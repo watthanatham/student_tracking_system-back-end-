@@ -25,7 +25,7 @@ Subject.getAllSubjects = (result) => {
 }
 // get subject by id 
 Subject.getSubjectById = (id, result) => {
-  dbCon.query('SELECT * FROM subjects WHERE sub_id=?', id, (err, res) => {
+  dbCon.query('SELECT * FROM subject WHERE sub_id=?', id, (err, res) => {
     if(err) {
       console.log('Error while fetching subject by id', err)
       result(null,err)
@@ -49,7 +49,7 @@ Subject.createNewSubject = (subjectReqData, result) => {
 }
 // update subject
 Subject.updateSubject = (id, subjectReqData, result) => {
-  dbCon.query('UPDATE subject SET sub_code=?, sub_name_thai=?, sub_name_eng=?, sub_credit=?, st_id=?, module_id=? WHERE sub_id=?', [subjectReqData.sub_code,subjectReqData.sub_name_thai,subjectReqData.sub_name_eng,subjectReqData.sub_credit,subjectReqData.st_id,subjectReqData.module_id, id] , (err, res) => {
+  dbCon.query('UPDATE subject SET sub_code=?, sub_name_thai=?, sub_name_eng=?, sub_credit=?, st_id=?, module_id=?, course_id=? WHERE sub_id=?', [subjectReqData.sub_code,subjectReqData.sub_name_thai,subjectReqData.sub_name_eng,subjectReqData.sub_credit,subjectReqData.st_id,subjectReqData.module_id, subjectReqData.course_id, id] , (err, res) => {
     if(err) {
       console.log('Error while update data')
       result(null, err)
