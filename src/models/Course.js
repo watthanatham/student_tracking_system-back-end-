@@ -23,4 +23,15 @@ Course.getAllCourse = (result) => {
         }
     })
 }
+Course.createNewCourse = (courseReqData, result) => {
+    dbCon.query('INSERT INTO course SET ?', courseReqData, (err, res) => {
+        if(err) {
+            console.log('Error while inserting data')
+            result(null, err)
+        }else {
+            console.log('Insert new course successfully')
+            result(null, res)
+        }
+    })
+}
 module.exports = Course

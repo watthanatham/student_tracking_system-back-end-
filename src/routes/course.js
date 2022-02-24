@@ -5,5 +5,7 @@ const courseController = require('../controllers/CourseController')
 
 // get all course
 router.get('/', courseController.getAllCourse)
+// create new course
+router.post('/', courseController.createNewCourse)
 
 module.exports = router
