@@ -6,5 +6,6 @@ const subjecttypeController = require('../controllers/SubjectTypesController')
 router.get('/', subjecttypeController.getAllTypes)
 // insert types
 router.post('/',subjecttypeController.createNewType)
-
+// update subject_type
+router.put('/:id', subjecttypeController.updateSubjectType)
 module.exports = router
