@@ -25,7 +25,7 @@ Student.getAllStudent = (result) => {
 Student.getStudentById = (id, result) => {
     dbCon.query('SELECT stu_id, stu_uid, stu_firstname, stu_lastname FROM student WHERE stu_id=?', id, (err, res) => {
         if(err) {
-        console.log('Error while fetching student by id', err)
+            console.log('Error while fetching student by id', err)
             result(null,err)
         }else {
             console.log('Student fetched by id successfully')
