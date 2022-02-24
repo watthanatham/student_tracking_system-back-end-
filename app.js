@@ -13,12 +13,12 @@ app.get('/', (req, res) => {
 
 // import routes
 const userRouter = require('./src/routes/user')
-const subjectRouter = require('./src/routes/subject')
-const subjecttypeRouter = require('./src/routes/subject_type')
-const courseRouter = require('./src/routes/course')
-const studentRouter = require('./src/routes/student')
-const modelsubjectRouter = require('./src/routes/model_subject')
-const studentresultRouter = require('./src/routes/student_result')
+const subjectRouter = require('./src/routes/Teacher/subject')
+const subjecttypeRouter = require('./src/routes/Teacher/subject_type')
+const courseRouter = require('./src/routes/Teacher/course')
+const studentRouter = require('./src/routes/Teacher/student')
+const modelsubjectRouter = require('./src/routes/Teacher/model_subject')
+const studentresultRouter = require('./src/routes/Teacher/student_result')
 
 
 // create routes
@@ -29,6 +29,7 @@ app.use('/course', courseRouter)
 app.use('/student', studentRouter)
 app.use('/model_subject', modelsubjectRouter)
 app.use('/student_result', studentresultRouter)
+
 
 
 app.listen(port, ()=> {
