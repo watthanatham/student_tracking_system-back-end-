@@ -1,12 +1,11 @@
 const ModelsubjectModel = require('../../models/Teacher/Model_Subject')
 
 // get all course
-exports.getAllModel = (req, res) => {
-    ModelsubjectModel.getAllModel((err, course) => {
-        console.log('Get all course successfully')
+exports.getModule = (req, res) => {
+    ModelsubjectModel.getModule((err, model_subject) => {
         if(err)
         res.send(err)
-        console.log('Module', module)
-        res.send(course)
+        console.log(model_subject)
+        res.send(model_subject)
     })
 }
