@@ -34,9 +34,24 @@ exports.insertNewStudent = (req, res) => {
     })
   }
 }
+exports.insertNewStudentImport = (req, res) => {
+  console.log('Req student data', req.body)
+  const studentReqData = new StudentModel(req.body)
+
+  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+    res.send(400).send({success: false, message: 'Please fill data all fields'})
+  }else {
+    console.log('Valid data')
+    StudentModel.insertNewStudentImport(req.body, (err, student) => {
+      if(err)
+      res.send(err)
+      res.json({ status: true, message: 'Insert student completed', data: student })
+    })
+  }
+}
 exports.updateStudent = (req, res) => {
   const studentReqData = new StudentModel(req.body)
-  console.log('student req data update', studentReqData)
+  console.log('student req data update', req.body)
 
   if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
     res.send(400).send({success: false, message: 'Please fill all fields'})

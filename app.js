@@ -20,6 +20,7 @@ const studentRouter = require('./src/routes/Teacher/student')
 const modelsubjectRouter = require('./src/routes/Teacher/model_subject')
 const studentresultRouter = require('./src/routes/Teacher/student_result')
 const typesubjectRouter = require('./src/routes/Teacher/type_subject')
+const trainingRouter = require('./src/routes/Student/training')
 
 
 // create routes
@@ -31,6 +32,7 @@ app.use('/student', studentRouter)
 app.use('/model_subject', modelsubjectRouter)
 app.use('/student_result', studentresultRouter)
 app.use('/type_subject', typesubjectRouter)
+app.use('/training_hours', trainingRouter)
 
 
 app.listen(port, ()=> {
