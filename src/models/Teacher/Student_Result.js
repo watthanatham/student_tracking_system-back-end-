@@ -13,7 +13,7 @@ var Student_Result = function(student_result) {
 }
 // get all result
 Student_Result.getAllStudentResult = (result) => {
-    dbCon.query('SELECT sr_id, stu_uid, stu_firstname, stu_lastname, sr_year, sr_term, sr_grade FROM  student INNER JOIN student_result ON student.stu_id = student_result.stu_id', (err, res) => {
+    dbCon.query('SELECT student.stu_id, student.stu_firstname, stu_lastname, student_result.sr_year, student_result.sr_term, student_result.sr_grade FROM student, student_result WHERE student.stu_id = student_result.stu_id', (err, res) => {
         if(err) {
             console.log('Error while fetching student result', err)
             result(null, err)
@@ -25,7 +25,7 @@ Student_Result.getAllStudentResult = (result) => {
 }
 // get by id
 Student_Result.getStudentResultById = (id, result) => {
-    dbCon.query('SELECT sr_id, stu_uid, stu_firstname, stu_lastname, sr_year, sr_term, sr_grade FROM  student INNER JOIN student_result ON student.stu_id = student_result.stu_id WHERE sr_id=?', id, (err, res) => {
+    dbCon.query('SELECT sr_id, stu_id, stu_firstname, stu_lastname, sr_year, sr_term, sr_grade FROM student INNER JOIN student_result ON student.stu_id = student_result.stu_id WHERE sr_id=?', id, (err, res) => {
         if(err) {
             console.log('Error while fetched student result by id', err)
             result(null, err)

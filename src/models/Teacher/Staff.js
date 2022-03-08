@@ -3,7 +3,7 @@ var dbCon = require('../../../config/db.config')
 var Staff = function(staff) {
   this.staff_id = staff.staff_id
   this.staff_username = staff.staff_username
-  this.staff_password = this.staff_password
+  this.staff_password = staff.staff_password
 }
 
 //get all staff
