@@ -2,7 +2,7 @@ const SubjectTypesModel = require('../../models/Teacher/Subject_Type')
 
 // get all subject types
 exports.getAllTypes = (req, res) => {
-  SubjectTypesModel.getAllTypes ((err, subject_type) => {
+  SubjectTypesModel.getAllTypes (req.params.id, (err, subject_type) => {
     console.log('Get all subject types sucessfully')
     if(err)
     res.send(err)
