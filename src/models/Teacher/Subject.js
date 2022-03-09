@@ -11,8 +11,8 @@ var Subject = function(subject) {
   this.course_id = subject.course_id
 }
 // get all subjects
-Subject.getAllSubjects = (result) => {
-  dbCon.query('SELECT sub_id, sub_name_thai, sub_name_eng, sub_credit, st_name, module_name FROM subject INNER JOIN module ON subject.module_id = module.module_id INNER JOIN subject_type ON subject.st_id = subject_type.st_id', (err, res) => {
+Subject.getAllSubjects = (id, result) => {
+  dbCon.query('SELECT sub_id, sub_name_thai, sub_name_eng, sub_credit, st_name, module_name FROM subject INNER JOIN module ON subject.module_id = module.module_id INNER JOIN subject_type ON subject.st_id = subject_type.st_id WHERE subject.course_id = ?', id,(err, res) => {
     if(err) {
       console.log('Error while fetching subjects', err)
       result(null, err)

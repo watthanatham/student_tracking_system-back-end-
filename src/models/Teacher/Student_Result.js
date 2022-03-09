@@ -9,8 +9,8 @@ var Student_Result = function(student_result) {
     this.sr_grade = student_result.sr_grade
 }
 // get all result
-Student_Result.getAllStudentResult = (result) => {
-    dbCon.query('SELECT student.stu_id, student.stu_firstname, stu_lastname, student_result.sr_year, student_result.sr_term, student_result.sr_grade FROM student, student_result WHERE student.stu_id = student_result.stu_id', (err, res) => {
+Student_Result.getAllStudentResult = (course_id,sub_id, result) => {
+    dbCon.query('SELECT student.stu_id, student.stu_firstname, stu_lastname,student_result.sub_id, student_result.sr_year, student_result.sr_term, student_result.sr_grade FROM student, student_result WHERE student.stu_id = student_result.stu_id AND student.course_id = ? AND student_result.sub_id = ?', [course_id, sub_id],(err, res) => {
         if(err) {
             console.log('Error while fetching student result', err)
             result(null, err)

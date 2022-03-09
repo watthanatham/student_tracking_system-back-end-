@@ -2,7 +2,8 @@ const StudentResultModel = require('../../models/Teacher/Student_Result')
 
 // get all result
 exports.getAllStudentResult = (req, res) => {
-    StudentResultModel.getAllStudentResult ((err, student_result) => {
+    console.log(req.params.id)
+    StudentResultModel.getAllStudentResult (req.params.course_id,req.params.sub_id, (err, student_result) => {
         console.log('Get all student result success')
         if(err)
         res.send(err)

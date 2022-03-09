@@ -4,9 +4,9 @@ const router = express.Router()
 const studentResultController = require('../../controllers/Teacher/StudentResultController')
 
 // get all result
-router.get('/', studentResultController.getAllStudentResult)
+router.get('/:course_id/:sub_id', studentResultController.getAllStudentResult)
 // get by id
-router.get('/:id', studentResultController.getStudentResultById)
+router.get('/id/:id', studentResultController.getStudentResultById)
 // insert new student result 
 router.post('/', studentResultController.insertStudentResult)
 // update student result 

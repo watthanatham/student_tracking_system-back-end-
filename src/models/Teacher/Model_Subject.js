@@ -6,8 +6,8 @@ var Model_Subject = function(model_subject) {
   this.module_id = Model_Subject.module_id
 }
 // get all types
-Model_Subject.getModule = (result) => {
-  dbCon.query('SELECT sub_id, sub_name_thai, module_name FROM  subject INNER JOIN module ON  subject.module_id = module.module_id', (err, res) => {
+Model_Subject.getModule = (id, result) => {
+  dbCon.query('SELECT sub_id, sub_name_thai, module_name FROM  subject INNER JOIN module ON  subject.module_id = module.module_id AND subject.course_id AND module.course_id=?', id,(err, res) => {
     if(err) {
       console.log('Error while fetching subject types.', err)
       result(null, err)

@@ -3,5 +3,5 @@ const router = express.Router()
 const typesubjectController = require('../../controllers/Teacher/TypeSubjectController')
 
 // get all types
-router.get('/', typesubjectController.getTypeSubject)
+router.get('/:id', typesubjectController.getTypeSubject)
 module.exports = router
