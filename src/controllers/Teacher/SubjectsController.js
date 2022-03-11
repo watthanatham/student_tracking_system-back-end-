@@ -36,7 +36,7 @@ exports.createNewSubject = (req, res) => {
 }
 exports.importNewSubject = (req, res) => {
   console.log('Req subject data', req.body)
-  const subjectReqData = new SubjectModel(req.body)
+  // const subjectReqData = new SubjectModel(req.body)
 
   if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
     res.send(400).send({success: false, message: 'Please fill all fields'})

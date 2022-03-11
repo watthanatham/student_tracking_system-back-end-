@@ -48,6 +48,7 @@ Subject.createNewSubject = (subjectReqData, result) => {
 }
 // import
 Subject.importNewSubject = (subjectReqData, result) => {
+  console.log(subjectReqData)
   dbCon.query('INSERT INTO subject (sub_id, st_id, module_id, course_id, sub_name_thai, sub_name_eng, sub_credit) VALUES ?', [subjectReqData], (err, res) => {
     if(err) {
       console.log('Error while inserting data')
@@ -60,7 +61,7 @@ Subject.importNewSubject = (subjectReqData, result) => {
 }
 // update subject
 Subject.updateSubject = (id, subjectReqData, result) => {
-  dbCon.query('UPDATE subject SET sub_name_thai=?, sub_name_eng=?, sub_credit=?, st_id=?, module_id=?, course_id=? WHERE sub_id=?', [subjectReqData.sub_name_thai,subjectReqData.sub_name_eng,subjectReqData.sub_credit,subjectReqData.st_id,subjectReqData.module_id, subjectReqData.course_id, id] , (err, res) => {
+  dbCon.query('UPDATE subject SET sub_id, sub_name_thai=?, sub_name_eng=?, sub_credit=?, st_id=?, module_id=? WHERE sub_id=?', [subjectReqData.sub_name_thai,subjectReqData.sub_name_eng,subjectReqData.sub_credit,subjectReqData.st_id,subjectReqData.module_id, id] , (err, res) => {
     if(err) {
       console.log('Error while update data')
       result(null, err)
