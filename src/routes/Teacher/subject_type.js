@@ -8,4 +8,6 @@ router.get('/:id', subjecttypeController.getAllTypes)
 router.post('/',subjecttypeController.createNewType)
 // update subject_type
 router.put('/:id', subjecttypeController.updateSubjectType)
+// get subject_type in form
+router.get('/st/:id', subjecttypeController.getSubjectTypeinForm)
 module.exports = router

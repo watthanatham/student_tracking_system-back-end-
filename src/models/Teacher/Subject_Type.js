@@ -42,4 +42,17 @@ Subject_Type.updateSubjectType = (id, sub_typeReqdata, result) => {
     }
   })
 }
+Subject_Type.getSubjectTypeinForm = (id, result) => {
+  dbCon.query('SELECT st_id as value, CONCAT("วิชา",st_name) as text FROM subject_type a WHERE a.course_id=?', id, (err, res) => {
+    if(err) {
+      console.log('Error getting subject type')
+      result(null,err)
+    }
+    else {
+      console.log('Get subject type in form success')
+      result(null, res)
+    }
+    
+  })
+}
 module.exports = Subject_Type

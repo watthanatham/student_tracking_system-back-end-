@@ -10,7 +10,7 @@ var Student_Result = function(student_result) {
 }
 // get all result
 Student_Result.getAllStudentResult = (course_id,sub_id, result) => {
-    dbCon.query('SELECT student.stu_id, student.stu_firstname, stu_lastname,student_result.sub_id, student_result.sr_year, student_result.sr_term, student_result.sr_grade FROM student, student_result WHERE student.stu_id = student_result.stu_id AND student.course_id = ? AND student_result.sub_id = ?', [course_id, sub_id],(err, res) => {
+    dbCon.query('SELECT student.stu_id, student.stu_firstname, stu_lastname,student_result.sub_id, student_result.sr_id, student_result.sr_year, student_result.sr_term, student_result.sr_grade FROM student, student_result WHERE student.stu_id = student_result.stu_id AND student.course_id = ? AND student_result.sub_id = ?', [course_id, sub_id],(err, res) => {
         if(err) {
             console.log('Error while fetching student result', err)
             result(null, err)
@@ -22,7 +22,7 @@ Student_Result.getAllStudentResult = (course_id,sub_id, result) => {
 }
 // get by id
 Student_Result.getStudentResultById = (id, result) => {
-    dbCon.query('SELECT sr_id, stu_id, stu_firstname, stu_lastname, sr_year, sr_term, sr_grade FROM student INNER JOIN student_result ON student.stu_id = student_result.stu_id WHERE sr_id=?', id, (err, res) => {
+    dbCon.query('SELECT b.sr_id, b.sub_id, a.stu_id, a.stu_firstname, a.stu_lastname, b.sr_year, b.sr_term, b.sr_grade FROM student a INNER JOIN student_result b ON a.stu_id = b.stu_id WHERE sr_id=?', id, (err, res) => {
         if(err) {
             console.log('Error while fetched student result by id', err)
             result(null, err)

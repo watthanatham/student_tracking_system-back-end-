@@ -6,7 +6,7 @@ const subjectController = require('../../controllers/Teacher/SubjectsController'
 // get all subjects
 router.get('/:id', subjectController.getAllSubjects)
 // get subject by id
-router.get('/:id', subjectController.getSubjectById)
+router.get('/sub/:id', subjectController.getSubjectById)
 // create new subject
 router.post('/', subjectController.createNewSubject)
 // import

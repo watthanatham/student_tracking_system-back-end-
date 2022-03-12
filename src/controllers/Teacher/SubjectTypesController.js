@@ -40,3 +40,13 @@ exports.updateSubjectType = (req, res) => {
     })
   }
 }
+// get Subject Type in form
+exports.getSubjectTypeinForm = (req, res) => {
+  SubjectTypesModel.getSubjectTypeinForm (req.params.id, (err, subject_type) => {
+    console.log('Get subject type in form')
+    if(err)
+    res.send(err)
+    console.log('Subject Types', subject_type)
+    res.send(subject_type)
+  })
+}
