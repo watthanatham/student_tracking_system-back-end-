@@ -7,7 +7,7 @@ var Study_Results = function(type_subject) {
 }
 // get all types
 Study_Results.getStudyResult = (result) => {
-  dbCon.query('SELECT sub_code,  sub_credit, sr_grade FROM  subject INNER JOIN student_result ON subject.sub_id = student_result.sub_id', (err, res) => {
+  dbCon.query('SELECT a.sub_id,  a.sub_credit, b.sr_grade FROM  subject AS a INNER JOIN student_result AS b ON a.sub_id = b.sub_id', (err, res) => {
     if(err) {
       console.log('Error while fetching subject types.', err)
       result(null, err)
