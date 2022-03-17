@@ -12,6 +12,7 @@ exports.getAllCourse = (req, res) => {
 }
 exports.createNewCourse = (req, res) => {
     console.log('Req course data', req.body)
+    const courseReqData = new CourseModel(req.body)
 
     if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
         res.send(400).send({success: false, message: 'Please fill data all fields'})
@@ -20,7 +21,7 @@ exports.createNewCourse = (req, res) => {
         CourseModel.createNewCourse(courseReqData, (err, course) => {
             if(err)
             res.send(err)
-            res.json({ status: true, message: 'Insert course successfully', data: subject })
+            res.json({ status: true, message: 'Insert course successfully', data: course })
         })
     }
 }

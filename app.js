@@ -23,6 +23,7 @@ const typesubjectRouter = require('./src/routes/Teacher/type_subject')
 const trainingRouter = require('./src/routes/Student/training')
 const studyresultsRouter = require('./src/routes/Student/study_results')
 const staffRouter = require('./src/routes/Teacher/staff')
+const studycheckmoduleRouter = require('./src/routes/Student/study_check_module')
 
 // create routes
 app.use('/users', userRouter)
@@ -36,7 +37,7 @@ app.use('/type_subject', typesubjectRouter)
 app.use('/training_hours', trainingRouter)
 app.use('/study_results', studyresultsRouter)
 app.use('/staff', staffRouter)
-
+app.use('/study_check_module', studycheckmoduleRouter)
 
 app.listen(port, ()=> {
   console.log('Server is running...')

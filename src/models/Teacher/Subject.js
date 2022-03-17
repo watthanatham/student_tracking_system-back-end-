@@ -24,7 +24,7 @@ Subject.getAllSubjects = (id, result) => {
 }
 // get subject by id 
 Subject.getSubjectById = (id, result) => {
-  dbCon.query('SELECT a.sub_id, a.sub_name_thai, a.sub_name_eng, a.sub_credit, a.st_id, c.st_name, b.module_name FROM subject a INNER JOIN module b ON a.module_id = b.module_id INNER JOIN subject_type c ON a.st_id = c.st_id WHERE a.sub_id=?', id, (err, res) => {
+  dbCon.query('SELECT a.sub_id, a.sub_name_thai, a.sub_name_eng, a.sub_credit, a.st_id, c.st_name, a.module_id, b.module_name FROM subject a INNER JOIN module b ON a.module_id = b.module_id INNER JOIN subject_type c ON a.st_id = c.st_id WHERE a.sub_id=?', id, (err, res) => {
     if(err) {
       console.log('Error while fetching subject by id', err)
       result(null,err)
@@ -83,4 +83,5 @@ Subject.deleteSubject = (id, result) => {
     }
   })
 }
+
 module.exports = Subject

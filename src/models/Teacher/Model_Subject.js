@@ -17,4 +17,17 @@ Model_Subject.getModule = (id, result) => {
     }
   })
 }
+Model_Subject.getModuleinForm = (id, result) => {
+  dbCon.query('SELECT module_id as value, module_name as text FROM module WHERE course_id=?', id, (err, res) => {
+    if(err) {
+      console.log('Error getting subject type')
+      result(null,err)
+    }
+    else {
+      console.log('Get subject type in form success')
+      result(null, res)
+    }
+  })
+}
+
 module.exports = Model_Subject

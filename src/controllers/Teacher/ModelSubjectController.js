@@ -9,3 +9,12 @@ exports.getModule = (req, res) => {
         res.send(model_subject)
     })
 }
+exports.getModuleinForm = (req, res) => {
+    ModelsubjectModel.getModuleinForm (req.params.id, (err, model_subject) => {
+      console.log('Get subject type in form')
+      if(err)
+      res.send(err)
+      console.log('Module', model_subject)
+      res.send(model_subject)
+    })
+  }

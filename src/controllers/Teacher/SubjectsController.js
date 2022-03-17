@@ -59,6 +59,7 @@ exports.updateSubject = (req, res) => {
   }else {
     console.log('Valid data')
     SubjectModel.updateSubject(req.params.id, subjectReqData, (err, subject) => {
+      console.log(subjectReqData)
       if(err)
       res.send(err)
       res.json({ status : true, message: 'Update subject information successfully', data: subject})

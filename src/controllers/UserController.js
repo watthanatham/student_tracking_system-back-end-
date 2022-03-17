@@ -4,7 +4,7 @@ const UserModel = require('../models/User')
 exports.getUserList = (req, res)=> {
   //console.log('Get user successfully')
   UserModel.getAllUsers((err, user) => {
-    console.log('Get user success fully')
+    console.log('Get user success')
     if(err)
     res.send(err)
     console.log('Users', user)
