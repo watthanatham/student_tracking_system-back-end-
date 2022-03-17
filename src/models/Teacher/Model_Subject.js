@@ -22,8 +22,7 @@ Model_Subject.getModuleinForm = (id, result) => {
     if(err) {
       console.log('Error getting subject type')
       result(null,err)
-    }
-    else {
+    }else {
       console.log('Get subject type in form success')
       result(null, res)
     }

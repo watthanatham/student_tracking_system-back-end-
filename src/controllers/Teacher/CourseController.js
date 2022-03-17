@@ -25,3 +25,12 @@ exports.createNewCourse = (req, res) => {
         })
     }
 }
+exports.getCourseinForm = (req, res) => {
+    CourseModel.getCourseinForm((err, course) => {
+        console.log('Get all course in form success')
+        if(err)
+        res.send(err)
+        console.log('Get Course', course)
+        res.send(course)
+    })
+}

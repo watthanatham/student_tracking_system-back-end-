@@ -28,4 +28,15 @@ Course.createNewCourse = (courseReqData, result) => {
         }
     })
 }
+Course.getCourseinForm = (result) => {
+    dbCon.query('SELECT course_id as value, course_name as text FROM course', (err, res) => {
+        if(err) {
+            console.log('Error getting course')
+            result(null,err)
+          }else {
+            console.log('Get course in form success')
+            result(null, res)
+        }
+    })
+}
 module.exports = Course

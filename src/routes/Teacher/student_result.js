@@ -9,6 +9,8 @@ router.get('/result_get/:id', studentResultController.getStudentResultById)
 router.get('/:course_id/:sub_id', studentResultController.getAllStudentResult)
 // insert new student result 
 router.post('/', studentResultController.insertStudentResult)
+// import data
+router.post('/import', studentResultController.importNewResult)
 // update student result 
 router.put('/:id', studentResultController.updateStudentResult)
 // delete student result 

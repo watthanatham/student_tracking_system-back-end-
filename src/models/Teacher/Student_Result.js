@@ -44,6 +44,17 @@ Student_Result.insertStudentResult = (studentresultReqData, result) => {
         }
     })
 }
+Student_Result.importNewResult = (studentresultReqData, result) => {
+    dbCon.query('INSERT INTO student_result (sr_id, stu_id, sub_id, sr_year, sr_term, sr_grade) VALUES ?' [studentresultReqData], (err, res) => {
+        if(err) {
+            console.log('Error while import data')
+            result(null, err)
+        }else {
+            console.log('Import result success')
+            result(null, res)
+        }
+    })
+}
 Student_Result.updateStudentResult = (id, studentresultReqData, result) => {
     dbCon.query('UPDATE student_result SET sr_year=?, sr_term=?, sr_grade=? WHERE sr_id=?', [studentresultReqData.sr_year, studentresultReqData.sr_term, studentresultReqData.sr_grade, id], (err, res) => {
         if(err) {
