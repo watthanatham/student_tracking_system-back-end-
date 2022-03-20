@@ -44,8 +44,7 @@ exports.importNewResult = (req, res) => {
     }else {
       console.log('Valid data')
       StudentResultModel.importNewResult(req.body, (err, student_result) => {
-        if(err)
-        res.send(err)
+        if(err) res.send(err);
         res.json({ status: true, message: 'Insert student_result completed', data: student_result })
       })
     }

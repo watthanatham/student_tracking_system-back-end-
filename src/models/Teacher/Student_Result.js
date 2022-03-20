@@ -45,7 +45,7 @@ Student_Result.insertStudentResult = (studentresultReqData, result) => {
     })
 }
 Student_Result.importNewResult = (studentresultReqData, result) => {
-    dbCon.query('INSERT INTO student_result (sr_id, stu_id, sub_id, sr_year, sr_term, sr_grade) VALUES ?' [studentresultReqData], (err, res) => {
+    dbCon.query('INSERT INTO student_result (stu_id, sub_id, sr_year, sr_term, sr_grade) VALUES ?',[studentresultReqData], (err, res) => {
         if(err) {
             console.log('Error while import data')
             result(null, err)

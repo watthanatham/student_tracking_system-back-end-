@@ -18,6 +18,7 @@ Subject_Type.getAllTypes = (id, result) => {
     }
   })
 }
+// insert subject types
 Subject_Type.createNewType = (sub_typeReqdata, result) => {
   dbCon.query('INSERT INTO subject_type SET ?', sub_typeReqdata, (err, res) => {
     if(err) {
@@ -29,7 +30,6 @@ Subject_Type.createNewType = (sub_typeReqdata, result) => {
     }
   })
 }
-// insert subject types
 // update subject_type
 Subject_Type.updateSubjectType = (id, sub_typeReqdata, result) => {
   dbCon.query('UPDATE subject_type SET st_credit=? WHERE st_id=?', [sub_typeReqdata.st_credit, id], (err, res) => {
