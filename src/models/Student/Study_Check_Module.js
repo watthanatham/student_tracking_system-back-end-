@@ -16,6 +16,17 @@ StudycheckM.getModuleOverview = (result) => {
       result(null, res)
     }
   })
-} 
+}
+StudycheckM.getResultSubjectbyModule = (module_id, result) => {
+  dbCon.query('SELECT a.sub_id, a.sub_credit, b.sr_grade FROM subject AS a, student_result As b WHERE a.sub_id = b.sub_id AND a.module_id = ? AND b.stu_id = 61160028', [module_id], (err, res) => {
+    if(err) {
+      console.log('Error while fetching student result')
+      result(null, err)
+    }else {
+      console.log('Result fetched successfully')
+      result(null, res)
+    }
+  })
+}
 
 module.exports = StudycheckM

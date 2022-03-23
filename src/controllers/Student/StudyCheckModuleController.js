@@ -11,3 +11,11 @@ exports.getModuleOverview  = (req, res) => {
     res.send(studycheckmodule)
   })
 }
+exports.getResultSubjectbyModule = (req, res) => {
+  StudyCheckModuleModel.getResultSubjectbyModule(req.params.module_id,(err, studycheckmodule) => {
+    if(err)
+    res.send(err)
+    console.log('Result', studycheckmodule)
+    res.send(studycheckmodule)
+  })
+}

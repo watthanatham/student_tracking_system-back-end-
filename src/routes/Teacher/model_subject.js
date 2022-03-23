@@ -4,7 +4,7 @@ const router = express.Router()
 const modelsubjectController = require('../../controllers/Teacher/ModelSubjectController')
 
 // get module inspect
-router.get('/inspect/:course_id/:module_id', modelsubjectController.InspectModule)
+router.get('/inspect/:course_id/:module_id/:stu_year', modelsubjectController.InspectModule)
 // get moduleinform
 router.get('/md/:id', modelsubjectController.getModuleinForm)
 // get all types

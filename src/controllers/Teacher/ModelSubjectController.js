@@ -10,7 +10,7 @@ exports.getModule = (req, res) => {
     })
 }
 exports.InspectModule = (req, res) => {
-  ModelsubjectModel.InspectModule(req.params.course_id,req.params.module_id,(err, model_subject) => {
+  ModelsubjectModel.InspectModule(req.params.course_id,req.params.module_id,req.params.stu_year,(err, model_subject) => {
       if(err)
       res.send(err)
       console.log(model_subject)
