@@ -10,6 +10,15 @@ exports.getAllTypes = (req, res) => {
     res.send(subject_type)
   })
 }
+exports.getTypebyId = (req, res) => {
+  SubjectTypesModel.getTypebyId (req.params.id, (err, subject_type) => {
+    console.log('Get all subject types by id sucessfully')
+    if(err)
+    res.send(err)
+    console.log('Subject Types by id', subject_type)
+    res.send(subject_type)
+  })
+}
 exports.createNewType = (req, res) => {
   const sub_typeReqdata = new SubjectTypesModel(req.body)
 

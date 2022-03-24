@@ -1,4 +1,5 @@
 const StudentModel = require('../../models/Teacher/Student')
+const bcrypt = require('bcrypt')
 
 // get all student
 exports.getAllStudent = (req, res) => {
@@ -19,8 +20,9 @@ exports.getStudentById = (req, res) => {
       res.send(student)
   })
 }
-exports.insertNewStudent = (req, res) => {
+exports.insertNewStudent = async (req, res) => {
   console.log('Req student data', req.body)
+  // req.body.stu_password = await bcrypt.hash(req.body.stu_password, 10)
   const studentReqData = new StudentModel(req.body)
 
   if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
@@ -34,7 +36,7 @@ exports.insertNewStudent = (req, res) => {
     })
   }
 }
-exports.insertNewStudentImport = (req, res) => {
+exports.insertNewStudentImport = async (req, res) => {
   console.log('Req student data', req.body)
   const studentReqData = new StudentModel(req.body)
 
@@ -42,6 +44,11 @@ exports.insertNewStudentImport = (req, res) => {
     res.send(400).send({success: false, message: 'Please fill data all fields'})
   }else {
     console.log('Valid data')
+    // const item = req.body;
+    // for(val of item) {
+    //   const hash = await bcrypt.hash(val[5], 10)
+    //   val[5] = hash
+    // }
     StudentModel.insertNewStudentImport(req.body, (err, student) => {
       if(err)
       res.send(err)

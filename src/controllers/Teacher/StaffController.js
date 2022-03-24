@@ -1,71 +1,52 @@
-const StaffModel =require('../../models/Teacher/Staff')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const StaffModel = require('../../models/Teacher/Staff')
 
-//get all staff
-exports.getAllStaff = (req, res) =>  {
-  StaffModel.getAllStaff((err, staff) => {
-    console.log('Get all staff successfully')
-    if(err)
-    res.send(err)
-    console.log('Staff', staff)
-    res.send(staff)
-  })
-}
-exports.getStaffById = (req, res) => {
-  StaffModel.getStaffById(req.params.id, (err, staff) => {
-    console.log('Get staff by id success')
-    if(err)
-    res.send(err)
-    console.log('Staff', staff)
-    res.send(staff)
-  })
-}
-exports.insertNewStaff = (req, res) => {
-  console.log('Req staff data', req.body)
-  const staffReqData = new StaffModel(req.body)
-
-  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({success: false, message: 'Please fill data all fields'})
-  }else {
-    console.log('Valid data')
-    StaffModel.insertNewStaff(staffReqData, (err, staff) => {
-      if(err)
-      res.send(err)
-      res.json({ status: true, message: 'Insert staff completed', data: staff })
+exports.loginController = (req, res, next) => {
+  const { staff_username='', staff_password } = req.body
+  StaffModel.findStaffByUsername({ staff_username: staff_username })
+    .then(async (row) => {
+      if(row.length !== 0) {
+        const hash = await bcrypt.hash(row[0].staff_password, 10)
+        return bcrypt.compare(staff_password, hash)
+          .then((result) => {
+            if(!result) {
+              res.status(401)
+                .json({
+                  message: 'Authentication failed'
+                })
+            } else {
+              let jwtToken = jwt.sign({
+                staff_username: row[0].staff_username,
+                staff_id: row[0].staff_id
+              },
+              'create-authen-nodejs', {
+                expiresIn: '1h'
+              })
+              res.status(200).json({
+                token: jwtToken,
+                expiresIn: 3600,
+              })
+            }
+          }).catch((error) => {
+            console.log(error)
+            res.status(401)
+              .json({
+                message: 'Authentication failed',
+                error: error
+              })
+          })
+      } else {
+        res.status(401)
+        .json({
+          message: 'Authentication failed'
+        })
+      }
     })
-  }
-}
-exports.insertNewStaffImport = (req, res) => {
-  console.log('Req staff data', req.body)
-
-  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({success: false, message: 'Please fill data all fields'})
-  }else {
-    console.log('Valid data')
-    StaffModel.insertNewStaffImport(req.body, (err, staff) => {
-      if(err)
-      res.send(err)
-      res.json({ status: true, message: 'Insert staff completed', data: staff })
+    .catch((error) => {
+      res.status(500)
+      .json({
+        message: error
+      })
     })
-  }
-}
-exports.updateStaff = (req, res) => {
-  const staffReqData = new StaffModel(req.body)
-
-  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({success: false, message: 'Please fill all fields'})
-  }else {
-    console.log('Valid data')
-    StaffModel.updateStaff(req.params.id, staffReqData, (err, staff) => {
-      if(err)
-      res.send(err)
-      res.json({ status : true, message: 'Update staff information completed', data: staff })
-    })
-  }
-}
-exports.deleteStaff = (req, res) => {
-  StaffModel.deleteStaff(req.params.id, (err, staff) => {
-    if(err)
-    res.send(err)
-    res.json({ success: true, message: 'Deleted staff success'})
-  })
 }

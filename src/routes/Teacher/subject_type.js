@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router()
 const subjecttypeController = require('../../controllers/Teacher/SubjectTypesController')
 
+// get by id
+router.get('/search_id/:id', subjecttypeController.getTypebyId)
 // get all types
 router.get('/:id', subjecttypeController.getAllTypes)
 // insert types
