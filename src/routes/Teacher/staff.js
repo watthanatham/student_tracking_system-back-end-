@@ -3,7 +3,7 @@ const router = express.Router()
 
 const staffController = require('../../controllers/Teacher/StaffController')
 
-// get all staff
+// staff login
 router.post('/login', staffController.loginController)
 
 module.exports = router
