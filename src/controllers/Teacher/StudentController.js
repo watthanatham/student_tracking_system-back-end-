@@ -1,5 +1,4 @@
 const StudentModel = require('../../models/Teacher/Student')
-const bcrypt = require('bcrypt')
 
 // get all student
 exports.getAllStudent = (req, res) => {
