@@ -7,7 +7,7 @@ var StudycheckM = function(studycheckmodule) {
 // get module result for student
 // fix id don't forget to fixed id
 StudycheckM.getModuleOverview = (result) => {
-  dbCon.query('SELECT module.module_name, module.module_credit, SUM(subject.sub_credit) as student_get FROM student_result INNER JOIN subject ON student_result.sub_id = subject.sub_id INNER JOIN module ON subject.module_id = module.module_id WHERE student_result.stu_id = 61160028 GROUP BY module.module_id ORDER BY module.module_id', (err, res) => {
+  dbCon.query('SELECT c.module_name, c.module_credit, SUM(b.sub_credit) as student_get FROM student_result AS a INNER JOIN subject AS b ON a.sub_id = b.sub_id INNER JOIN module AS c ON b.module_id = c.module_id WHERE a.stu_id = 61160028 GROUP BY c.module_id ORDER BY c.module_id', (err, res) => {
     if(err) {
       console.log('Error while fetching result', err)
       result(null, err)

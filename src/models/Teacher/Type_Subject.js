@@ -9,7 +9,7 @@ var Type_Subject = function(type_subject) {
 }
 // get all types
 Type_Subject.getTypeSubject = (id, result) => {
-  dbCon.query('SELECT sub_id, sub_name_thai, sub_credit, st_name FROM subject INNER JOIN subject_type ON subject.st_id = subject_type.st_id AND subject_type.course_id AND subject.course_id=?', id,(err, res) => {
+  dbCon.query('SELECT a.sub_id, a.sub_name_thai, a.sub_credit, b.st_name FROM subject AS a INNER JOIN subject_type AS b ON a.st_id = b.st_id AND b.course_id AND a.course_id=?', id,(err, res) => {
     if(err) {
       console.log('Error while fetching subject types.', err)
       result(null, err)
