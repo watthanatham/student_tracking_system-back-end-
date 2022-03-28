@@ -8,7 +8,7 @@ var Subject_Type = function(subject_type) {
 }
 // get all types
 Subject_Type.getAllTypes = (id, result) => {
-  dbCon.query('SELECT st_name, st_credit FROM subject_type WHERE course_id=? ', id, (err, res) => {
+  dbCon.query('SELECT st_id, st_name, st_credit FROM subject_type WHERE course_id=? ', id, (err, res) => {
     if(err) {
       console.log('Error while fetching subject types.', err)
       result(null, err)

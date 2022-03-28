@@ -23,6 +23,7 @@ exports.loginController = (req, res, next) => {
               'create-authen-nodejs', {
                 expiresIn: '1h'
               })
+              console.log(jwtToken)
               res.status(200).json({
                 token: jwtToken,
                 expiresIn: 3600,
