@@ -41,7 +41,7 @@ Model_Subject.createNewModule = (moduleReqdata, result) => {
   })
 }
 Model_Subject.InspectModule = (course_id, module_id, stu_year, result) => {
-  dbCon.query('SELECT a.sub_id,a.sub_name_thai, substring(cast(b.stu_id as varchar(8)),1,2) AS series, sum(case \'!F\' when sr_grade then 0 else 1 end) AS pass, (COUNT(b.stu_id)-sum(case \'F\' when sr_grade then 0 else 1 end)) AS fail FROM subject AS a INNER JOIN student_result AS b ON a.sub_id=b.sub_id INNER JOIN student AS c ON c.stu_id=b.stu_id WHERE substring(cast(b.stu_id as varchar(8)),1,2) = ? AND a.course_id = ? AND a.module_id = ? GROUP BY a.sub_id, substring(cast(b.stu_id as varchar(8)),1,2)', [stu_year, course_id, module_id], (err, res) => {
+  dbCon.query('SELECT a.sub_id,a.sub_name_thai, substring(cast(b.stu_id as varchar(8)),1,2) AS series, sum(case \'F\' when sr_grade then 0 else 1 end) AS pass, (COUNT(b.stu_id)-sum(case \'F\' when sr_grade then 0 else 1 end)) AS fail FROM subject AS a INNER JOIN student_result AS b ON a.sub_id=b.sub_id INNER JOIN student AS c ON c.stu_id=b.stu_id WHERE substring(cast(b.stu_id as varchar(8)),1,2) = ? AND a.course_id = ? AND a.module_id = ? GROUP BY a.sub_id, substring(cast(b.stu_id as varchar(8)),1,2)', [stu_year, course_id, module_id], (err, res) => {
     if(err) {
       console.log('Error while fetching information.', err)
       result(null, err)
