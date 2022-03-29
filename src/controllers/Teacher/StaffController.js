@@ -3,12 +3,12 @@ const jwt = require('jsonwebtoken')
 const StaffModel = require('../../models/Teacher/Staff')
 
 exports.loginController = (req, res, next) => {
-  const { staff_username='', staff_password } = req.body
-  StaffModel.findStaffByUsername({ staff_username: staff_username })
+  const { username, password } = req.body
+  StaffModel.findStaffByUsername({ staff_username: username })
     .then(async (row) => {
       if(row.length !== 0) {
         const hash = await bcrypt.hash(row[0].staff_password, 10)
-        return bcrypt.compare(staff_password, hash)
+        return bcrypt.compare(password, hash)
           .then((result) => {
             if(!result) {
               res.status(401)

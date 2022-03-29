@@ -8,6 +8,7 @@ class studentLogin {
   }
 }
 studentLogin.findStudentbyUsername = async (payload) => {
+  // console.log(payload)
   return new Promise ((resolve, reject) => {
     db.query('SELECT * FROM student WHERE stu_username = ?', [payload.stu_username], (err, res) => {
       if(err) {
