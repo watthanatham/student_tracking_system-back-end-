@@ -6,8 +6,8 @@ var Study_Results = function(type_subject) {
   this.sr_grade = Study_Results.sr_grade
 }
 // get all types
-Study_Results.getStudyResult = (st_id, result) => {
-  dbCon.query('SELECT a.sub_id, a.sub_credit, b.sr_grade FROM subject AS a, student_result AS b WHERE a.sub_id = b.sub_id AND a.st_id = ? AND b.stu_id = 61160028', [st_id],(err, res) => {
+Study_Results.getStudyResult = (st_id, stu_id ,result) => {
+  dbCon.query('SELECT a.sub_id, a.sub_credit, b.sr_grade FROM subject AS a, student_result AS b WHERE a.sub_id = b.sub_id AND a.st_id = ? AND b.stu_id = ?', [st_id, stu_id],(err, res) => {
     if(err) {
       console.log('Error while fetching subject types.', err)
       result(null, err)
