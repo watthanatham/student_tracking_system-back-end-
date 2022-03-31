@@ -51,5 +51,16 @@ Model_Subject.InspectModule = (course_id, module_id, stu_year, result) => {
     }
   })
 }
+Model_Subject.getReportforFail = (stu_year, course_id, module_id, result) => {
+  dbCon.query('SELECT c.stu_id FROM subject AS a INNER JOIN student_result AS b ON a.sub_id=b.sub_id INNER JOIN student AS c ON c.stu_id = b.stu_id WHERE substring(cast(b.stu_id as varchar(8)),1,2) = ? AND a.course_id = ? AND a.module_id = ? AND b.sr_grade = \'F\'', [stu_year, course_id, module_id], (err, res) => {
+    if (err) {
+      console.log('Error while fetching information.', err)
+      result(null, err)
+    }else {
+      console.log('Information fetched successfuly')
+      result(null, res)
+    }
+  })
+}
 
 module.exports = Model_Subject
