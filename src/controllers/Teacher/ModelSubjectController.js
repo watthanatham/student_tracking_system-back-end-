@@ -18,7 +18,7 @@ exports.InspectModule = (req, res) => {
   })
 }
 exports.getReportforFail = (req, res) => {
-  ModelsubjectModel.getReportforFail(req.params.stu_year, req.params.course_id, req.params.module_id, (err, model_subject) => {
+  ModelsubjectModel.getReportforFail(req.params.stu_year, req.params.course_id, req.params.module_id, req.params.sub_id,(err, model_subject) => {
     if(err)
     res.send(err)
     console.log(model_subject)

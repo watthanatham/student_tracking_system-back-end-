@@ -17,8 +17,10 @@ exports.loginController = (req, res, next) => {
                 })
             } else {
               let jwtToken = jwt.sign({
-                staff_username: row[0].staff_username,
-                staff_id: row[0].staff_id
+                username: row[0].staff_username,
+                id: row[0].staff_id,
+                type: 'staff'
+
               },
               'create-authen-nodejs', {
                 expiresIn: '1h'

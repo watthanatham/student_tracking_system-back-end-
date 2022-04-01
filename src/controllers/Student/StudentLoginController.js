@@ -18,11 +18,12 @@ exports.loginController = (req, res, next) => {
               })
           } else {
             let jwtToken = jwt.sign({
-              stu_id: row[0].stu_id,
+              id: row[0].stu_id,
               course_id: row[0].course_id,
-              stu_firstname: row[0].stu_firstname,
-              stu_lastname: row[0].stu_lastname,
-              stu_username: row[0].stu_username
+              firstname: row[0].stu_firstname,
+              lastname: row[0].stu_lastname,
+              username: row[0].stu_username,
+              type: 'student'
             },
             'create-authen-nodeks', {
               expiresIn: '1h'

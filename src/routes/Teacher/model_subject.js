@@ -6,7 +6,7 @@ const modelsubjectController = require('../../controllers/Teacher/ModelSubjectCo
 // get module inspect
 router.get('/inspect/:course_id/:module_id/:stu_year', modelsubjectController.InspectModule)
 // get report for fail
-router.get('/module_report/:stu_year/:course_id/:module_id', modelsubjectController.getReportforFail)
+router.get('/module_report/:stu_year/:course_id/:module_id/:sub_id', modelsubjectController.getReportforFail)
 // get moduleinform
 router.get('/md/:id', modelsubjectController.getModuleinForm)
 // get all types
