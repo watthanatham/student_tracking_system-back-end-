@@ -17,6 +17,8 @@ exports.loginController = (req, res, next) => {
                 })
             } else {
               let jwtToken = jwt.sign({
+                firstname: row[0].staff_firstname,
+                lastname: row[0].staff_lastname,
                 username: row[0].staff_username,
                 id: row[0].staff_id,
                 type: 'staff'
