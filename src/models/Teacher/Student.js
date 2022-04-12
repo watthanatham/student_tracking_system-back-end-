@@ -22,7 +22,7 @@ Student.getAllStudent = (result) => {
 }
 // get student by id
 Student.getStudentById = (id, result) => {
-    dbCon.query('SELECT a.stu_id, a.stu_firstname, a.stu_lastname , a.stu_username, a.stu_password, b.course_name  FROM student AS a, course AS b WHERE stu_id = ?', id, (err, res) => {
+    dbCon.query('SELECT a.stu_id, a.stu_firstname, a.stu_lastname , a.stu_username, a.stu_password, a.course_id  FROM student AS a, course AS b WHERE stu_id = ?', id, (err, res) => {
         if(err) {
             console.log('Error while fetching student by id', err)
             result(null,err)
