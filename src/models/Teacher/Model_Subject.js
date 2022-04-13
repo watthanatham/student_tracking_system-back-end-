@@ -6,14 +6,35 @@ var Model_Subject = function(model_subject) {
   this.module_name = model_subject.module_name
   this.module_credit = model_subject.module_credit
 }
-// get all types
-Model_Subject.getModule = (course_id, module_id, result) => {
-  dbCon.query('SELECT a.sub_id, a.sub_name_thai, a.sub_credit FROM subject AS a WHERE a.module_id = ? AND a.course_id = ?', [module_id, course_id],(err, res) => {
+Model_Subject.getAllModules = (course_id, result) => {
+  dbCon.query('SELECT module_id, module_name, module_credit FROM module WHERE course_id = ?', course_id, (err, res) => {
     if(err) {
-      console.log('Error while fetching subject types.', err)
+      console.log('Error while fetching module.')
       result(null, err)
     }else {
-      console.log('Subject types fetched successfully.')
+      console.log('Module fetched successfully.')
+      result(null, res)
+    }
+  })
+}
+Model_Subject.searchModuleById = (id, result) => {
+  dbCon.query('SELECT module_id, module_name, module_credit FROM module WHERE module_id = ?', id, (err, res) => {
+    if(err) {
+      console.log('Error while fetching module.')
+      result(null, err)
+    }else {
+      console.log('Module fetched success')
+      result(null, res)
+    }
+  })
+}
+Model_Subject.getModuleSubject = (course_id, module_id, result) => {
+  dbCon.query('SELECT a.sub_id, a.sub_name_thai, a.sub_credit FROM subject AS a WHERE a.module_id = ? AND a.course_id = ?', [module_id, course_id],(err, res) => {
+    if(err) {
+      console.log('Error while fetching subject Module.', err)
+      result(null, err)
+    }else {
+      console.log('Module fetched successfully.')
       result(null, res)
     }
   })
@@ -58,6 +79,17 @@ Model_Subject.getReportforFail = (stu_year, course_id, module_id, sub_id, result
       result(null, err)
     }else {
       console.log('Information fetched successfuly')
+      result(null, res)
+    }
+  })
+}
+Model_Subject.updateModule = (id, moduleReqdata, result) => {
+  dbCon.query('UPDATE module SET module_credit=? WHERE module_id = ?', [moduleReqdata.module_credit, id], (err, res) => {
+    if(err) {
+      console.log('Error while update data')
+      result(null, err)
+    } else {
+      console.log('Update module successfully')
       result(null, res)
     }
   })
