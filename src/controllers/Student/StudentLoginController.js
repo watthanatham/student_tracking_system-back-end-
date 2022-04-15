@@ -28,6 +28,7 @@ exports.loginController = (req, res, next) => {
             'create-authen-nodeks', {
               expiresIn: '1h'
             })
+            // console.log('student login success')
             res.status(200).json({
               token: jwtToken,
               expiresIn: 3600,
