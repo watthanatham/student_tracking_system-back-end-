@@ -1,4 +1,6 @@
 
+const { reject } = require('bcrypt/promises')
+const { resolve } = require('path')
 var dbCon = require('../../../config/db.config')
 
 var Subject = function(subject) {
@@ -35,8 +37,18 @@ Subject.getSubjectById = (id, result) => {
   })
 }
 // insert subject
-Subject.createNewSubject = (subjectReqData, result) => {
-  dbCon.query('INSERT INTO subject SET ?', subjectReqData, (err, res) => {
+Subject.createNewSubject = async (subjectReqData, result) => {
+  await dbCon.query('SELECT * FROM subject WHERE sub_id IN(?)', subjectReqData.sub_id, (err, res) => {
+    if(err) {
+      console.log(err)
+      result(null,err)
+    }else {
+      console.log(res)
+      result(res)
+    }
+  })
+
+  await dbCon.query('INSERT INTO subject SET ?', subjectReqData, (err, res) => {
     if(err) {
       console.log('Error while inserting data')
       result(null,err)
@@ -47,9 +59,21 @@ Subject.createNewSubject = (subjectReqData, result) => {
   })
 }
 // import
-Subject.importNewSubject = (subjectReqData, result) => {
+Subject.importNewSubject = async (subjectReqData, result) => {
   console.log(subjectReqData)
-  dbCon.query('INSERT INTO subject (sub_id, st_id, module_id, course_id, sub_name_thai, sub_name_eng, sub_credit) VALUES ?', [subjectReqData], (err, res) => {
+  const subcheck = subjectReqData.map(x => x[0])
+  // console.log(subcheck)
+  await dbCon.query('SELECT * FROM subject WHERE sub_id IN(?)', [subcheck], (err, res) => {
+    if(err) {
+      console.log(err)
+      result(null,err)
+    }else {
+      console.log(res)
+      result(res)
+    }
+  })
+  
+  await dbCon.query('INSERT INTO subject (sub_id, st_id, module_id, course_id, sub_name_thai, sub_name_eng, sub_credit) VALUES ?', [subjectReqData], (err, res) => {
     if(err) {
       console.log('Error while inserting data')
       result(null,err)

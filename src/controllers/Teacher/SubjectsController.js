@@ -20,34 +20,47 @@ exports.getSubjectById = (req, res) => {
   })
 }
 exports.createNewSubject = (req, res) => {
-  console.log('Req subject data', req.body)
-  const subjectReqData = new SubjectModel(req.body)
+  try {
+    console.log('Req subject data', req.body)
+    const subjectReqData = new SubjectModel(req.body)
 
-  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({success: false, message: 'Please fill all fields'})
-  }else {
-    console.log('Valid data')
-    SubjectModel.createNewSubject(subjectReqData, (err, subject) => {
-      if(err)
-      res.send(err)
-      res.json({ status: true, message: 'Insert subject completed', data: subject })
-    })
+    if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+      res.send(400).send({success: false, message: 'Please fill all fields'})
+    }else {
+      console.log('Valid data')
+      SubjectModel.createNewSubject(subjectReqData, (err, subject) => {
+        if(err)
+          res.json({ status: false, message: 'failed', data: err })
+        else 
+          res.json({ status: true, message: 'Insert subject completed', data: subject })
+      })
+    }
+
+  }catch (e) {
+    console.log(error)
   }
+  
 }
-exports.importNewSubject = (req, res) => {
-  console.log('Req subject data', req.body)
-  // const subjectReqData = new SubjectModel(req.body)
-
-  if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-    res.send(400).send({success: false, message: 'Please fill all fields'})
-  }else {
-    console.log('Valid data')
-    SubjectModel.importNewSubject(req.body, (err, subject) => {
-      if(err)
-      res.send(err)
-      res.json({ status: true, message: 'Insert subject completed', data: subject })
-    })
+exports.importNewSubject = (req, res, next) => {
+  try {
+    console.log('Req subject data', req.body)
+    // const subjectReqData = new SubjectModel(req.body)
+    if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+      res.send(400).send({success: false, message: 'Please fill all fields'})
+    }else {
+      console.log('Valid data')
+      SubjectModel.importNewSubject(req.body, (err, subject) => {
+        console.log('send')
+        if(err)
+          res.json({ status: false, message: 'failed', data: err })
+        else 
+          res.json({ status: true, message: 'Insert subject completed', data: subject })
+      })
+    }
+  }catch (e) {
+    console.log(e)
   }
+  
 }
 // update subject
 exports.updateSubject = (req, res) => {

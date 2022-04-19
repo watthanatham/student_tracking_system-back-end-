@@ -4,4 +4,5 @@ const typesubjectController = require('../../controllers/Teacher/TypeSubjectCont
 
 // get all types
 router.get('/:course_id/:st_id', typesubjectController.getTypeSubject)
+
 module.exports = router
