@@ -11,19 +11,25 @@ exports.getAllCourse = (req, res) => {
     })
 }
 exports.createNewCourse = (req, res) => {
-    console.log('Req course data', req.body)
-    const courseReqData = new CourseModel(req.body)
+    try {
+        console.log('Req course data', req.body)
+        const courseReqData = new CourseModel(req.body)
 
-    if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-        res.send(400).send({success: false, message: 'Please fill data all fields'})
-    }else {
-        console.log('Valid data')
-        CourseModel.createNewCourse(courseReqData, (err, course) => {
-            if(err)
-            res.send(err)
-            res.json({ status: true, message: 'Insert course successfully', data: course })
-        })
+        if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+            res.send(400).send({success: false, message: 'Please fill data all fields'})
+        }else {
+            console.log('Valid data')
+            CourseModel.createNewCourse(courseReqData, (err, course) => {
+                if(err)
+                    res.json({ status: false, message: 'failed', data: err })
+                else
+                    res.json({ status: true, message: 'Insert course successfully', data: course })
+            })
+        }
+    }catch (e) {
+        console.log(error)
     }
+    
 }
 exports.getCourseinForm = (req, res) => {
     CourseModel.getCourseinForm((err, course) => {
