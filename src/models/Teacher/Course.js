@@ -18,25 +18,22 @@ Course.getAllCourse = (result) => {
     })
 }
 Course.createNewCourse = async (courseReqData, result) => {
-    await dbCon.query('SELECT * FROM course WHERE course_id IN(?)', courseReqData.course_id, (err, res) => {
-        if(err) {
-            console.log(err)
-            result(null,err)
-        }else {
-            console.log(res)
-            result(res)
-          }
-    })
-    
-    await dbCon.query('INSERT INTO course SET ?', courseReqData, (err, res) => {
-        if(err) {
-            console.log('Error while inserting data')
-            result(null, err)
-        }else {
-            console.log('Insert new course successfully')
-            result(null, res)
+    await dbCon.query('SELECT * FROM course WHERE course_id IN(?)', courseReqData.course_id, async (err, res) => {
+        if(res.length > 0) {
+            result(res, null)
+            return
         }
-    })
+
+        await dbCon.query('INSERT INTO course SET ?', courseReqData, (err, res) => {
+            if(err) {
+                console.log('Error while inserting data')
+                result(null, err)
+            }else {
+                console.log('Insert new course successfully')
+                result(null, res)
+            }
+        })
+    }) 
 }
 Course.getCourseinForm = (result) => {
     dbCon.query('SELECT course_id as value, course_name as text FROM course', (err, res) => {

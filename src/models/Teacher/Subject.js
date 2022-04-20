@@ -38,15 +38,11 @@ Subject.getSubjectById = (id, result) => {
 }
 // insert subject
 Subject.createNewSubject = async (subjectReqData, result) => {
-  await dbCon.query('SELECT * FROM subject WHERE sub_id IN(?)', subjectReqData.sub_id, (err, res) => {
-    if(err) {
-      console.log(err)
-      result(null,err)
-    }else {
-      console.log(res)
-      result(res)
-    }
-  })
+  await dbCon.query('SELECT * FROM subject WHERE sub_id = ?', [subjectReqData.sub_id], async (err, res) => {
+    if(res.length > 0) {
+      result(res, null)
+      return
+  }
 
   await dbCon.query('INSERT INTO subject SET ?', subjectReqData, (err, res) => {
     if(err) {
@@ -57,30 +53,28 @@ Subject.createNewSubject = async (subjectReqData, result) => {
       result(null, res)
     }
   })
+
+  })
 }
 // import
 Subject.importNewSubject = async (subjectReqData, result) => {
-  console.log(subjectReqData)
   const subcheck = subjectReqData.map(x => x[0])
   // console.log(subcheck)
-  await dbCon.query('SELECT * FROM subject WHERE sub_id IN(?)', [subcheck], (err, res) => {
-    if(err) {
-      console.log(err)
-      result(null,err)
-    }else {
-      console.log(res)
-      result(res)
+  await dbCon.query('SELECT * FROM subject WHERE sub_id IN(?)', [subcheck], async (err, res) => {
+    if(res.length > 0) {
+      result(res, null)
+      return
     }
-  })
-  
-  await dbCon.query('INSERT INTO subject (sub_id, st_id, module_id, course_id, sub_name_thai, sub_name_eng, sub_credit) VALUES ?', [subjectReqData], (err, res) => {
-    if(err) {
-      console.log('Error while inserting data')
-      result(null,err)
-    }else {
-      console.log('Insert new subject successfully')
-      result(null, res)
-    }
+
+    await dbCon.query('INSERT INTO subject (sub_id, st_id, module_id, course_id, sub_name_thai, sub_name_eng, sub_credit) VALUES ?', [subjectReqData], (err, res) => {
+      if(err) {
+        console.log('Error while inserting data')
+        result(null,err)
+      }else {
+        console.log('Insert new subject successfully')
+        result(null, res)
+      }
+    })
   })
 }
 // update subject

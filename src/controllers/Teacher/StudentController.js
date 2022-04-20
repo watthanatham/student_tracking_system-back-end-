@@ -21,14 +21,14 @@ exports.getStudentById = (req, res) => {
 }
 exports.insertNewStudent = async (req, res) => {
   try {
-    console.log('Req student data', req.body)
+    // console.log('Req student data', req.body)
     // req.body.stu_password = await bcrypt.hash(req.body.stu_password, 10)
     const studentReqData = new StudentModel(req.body)
 
     if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
       res.send(400).send({success: false, message: 'Please fill data all fields'})
     }else {
-      console.log('Valid data')
+      // console.log('Valid data')
       StudentModel.insertNewStudent(studentReqData, (err, student) => {
         if(err)
           res.json({ status: false, message: 'failed', data: err })
@@ -37,7 +37,7 @@ exports.insertNewStudent = async (req, res) => {
       })
     }
   }catch (e) {
-
+    console.log(e)
   }
   
 }

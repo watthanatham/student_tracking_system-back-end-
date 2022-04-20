@@ -34,48 +34,42 @@ Student.getStudentById = (id, result) => {
 }
 // insert student 
 Student.insertNewStudent = async (studentReqData, result) => {
-    await dbCon.query('SELECT * FROM student WHERE stu_id IN(?)', studentReqData.stu_id, (err, res) =>{
-        if(err) {
-            console.log(err)
-            result(null,err)
-          }else {
-            console.log(res)
-            result(res)
-          }
-    })
-
-    await dbCon.query('INSERT INTO student SET ?', studentReqData, (err, res) => {
-        if(err) {
-            console.log('Error while inserting data')
-            result(null, err)
-        }else {
-            console.log('Insert new student successfully')
-            result(null, res)
+    await dbCon.query('SELECT * FROM student WHERE stu_id = ?', [studentReqData.stu_id], async (err, res) =>{
+        if(res.length > 0) {
+            result(res, null)
+            return
         }
-    })
-}
 
+        await dbCon.query('INSERT INTO student SET ?', studentReqData, (err, res) => {
+            if(err) {
+                console.log('Error while inserting data')
+                result(null, err)
+            }else {
+                console.log('Insert new student successfully')
+                result(null, res)
+            }
+        })
+    })  
+}
 Student.insertNewStudentImport = async (studentReqData, result) => {
     const stucheck = studentReqData.map(x => x[0])
-    await dbCon.query('SELECT * FROM student WHERE stu_id IN(?)', [stucheck], (err, res) => {
-        if(err) {
-            console.log(err)
-            result(null, err)
-        }else {
-            console.log(res)
-            result(res)
+    await dbCon.query('SELECT * FROM student WHERE stu_id IN(?)', [stucheck], async (err, res) => {
+        if(res.length > 0) {
+            result(res, null)
+            return
         }
-    })
 
-    await dbCon.query('INSERT INTO student (stu_id, course_id, stu_firstname, stu_lastname, stu_username, stu_password) VALUES ?', [studentReqData], (err, res) => {
-        if(err) {
-            console.log('Error while inserting data')
-            result(null, err)
-        }else {
-            console.log('Insert new student successfully')
-            result(null, res)
-        }
+        await dbCon.query('INSERT INTO student (stu_id, course_id, stu_firstname, stu_lastname, stu_username, stu_password) VALUES ?', [studentReqData], (err, res) => {
+            if(err) {
+                console.log('Error while inserting data')
+                result(null, err)
+            }else {
+                console.log('Insert new student successfully')
+                result(null, res)
+            }
+        })
     })
+    
 }
 // update student 
 Student.updateStudent = (id, studentReqData, result) => {
