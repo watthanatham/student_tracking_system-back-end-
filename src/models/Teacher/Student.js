@@ -68,8 +68,7 @@ Student.insertNewStudentImport = async (studentReqData, result) => {
                 result(null, res)
             }
         })
-    })
-    
+    }) 
 }
 // update student 
 Student.updateStudent = (id, studentReqData, result) => {

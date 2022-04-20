@@ -33,27 +33,42 @@ Student_Result.getStudentResultById = (id, result) => {
     })
 }
 // insert student result
-Student_Result.insertStudentResult = (studentresultReqData, result) => {
-    dbCon.query('INSERT INTO student_result SET ?', studentresultReqData, (err, res) => {
-        if(err) {
-            console.log('Error while inserting data')
-            result(null, err)
-        }else {
-            console.log('Insert new student result successfully')
-            result(null, res)
+Student_Result.insertStudentResult = async (studentresultReqData, result) => {
+    await dbCon.query('SELECT * FROM student_result WHERE stu_id = ?', [studentresultReqData.stu_id], async (err, res) => {
+        if(res.length > 0) {
+            result(res, null)
+            return
         }
-    })
+
+        await dbCon.query('INSERT INTO student_result SET ?', studentresultReqData, (err, res) => {
+            if(err) {
+                console.log('Error while inserting data')
+                result(null, err)
+            }else {
+                console.log('Insert new student result successfully')
+                result(null, res)
+            }
+        })
+    })   
 }
-Student_Result.importNewResult = (studentresultReqData, result) => {
-    dbCon.query('INSERT INTO student_result (stu_id, sub_id, sr_year, sr_term, sr_grade) VALUES ?',[studentresultReqData], (err, res) => {
-        if(err) {
-            console.log('Error while import data')
-            result(null, err)
-        }else {
-            console.log('Import result success')
-            result(null, res)
+Student_Result.importNewResult = async (studentresultReqData, result) => {
+    const resultcheck = studentresultReqData.map(x => x[0])
+    await dbCon.query('SELECT * FROM student_result WHERE stu_id IN(?)', [resultcheck], async (err, res) => {
+        if(res.length > 0) {
+            result(res, null)
+            return
         }
-    })
+
+        await dbCon.query('INSERT INTO student_result (stu_id, sub_id, sr_year, sr_term, sr_grade) VALUES ?',[studentresultReqData], (err, res) => {
+            if(err) {
+                console.log('Error while import data')
+                result(null, err)
+            }else {
+                console.log('Import result success')
+                result(null, res)
+            }
+        })
+    })  
 }
 Student_Result.updateStudentResult = (id, studentresultReqData, result) => {
     dbCon.query('UPDATE student_result SET sr_year=?, sr_term=?, sr_grade=? WHERE sr_id=?', [studentresultReqData.sr_year, studentresultReqData.sr_term, studentresultReqData.sr_grade, id], (err, res) => {

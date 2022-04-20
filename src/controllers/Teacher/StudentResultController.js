@@ -21,32 +21,44 @@ exports.getStudentResultById = (req, res) => {
     })
 }
 exports.insertStudentResult = (req, res) => {
-    console.log('Req student result data', req.body)
-    const studentresultReqData = new StudentResultModel(req.body)
+    try {
+        console.log('Req student result data', req.body)
+        const studentresultReqData = new StudentResultModel(req.body)
 
-    if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-        res.send(400).send({success: false, message: 'Please fill data all fields'})
-    }else {
-        console.log('Valid data')
-        StudentResultModel.insertStudentResult(studentresultReqData, (err, student_result) => {
-            if(err)
-            res.send(err)
-            res.json({ status: true, message: 'Insert student result completed', data: student_result})
-        })
+        if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+            res.send(400).send({success: false, message: 'Please fill data all fields'})
+        }else {
+            console.log('Valid data')
+            StudentResultModel.insertStudentResult(studentresultReqData, (err, student_result) => {
+                if(err)
+                    res.json({ status: false, message: 'failed', data: err })
+                else 
+                    res.json({ status: true, message: 'Insert student result completed', data: student_result})
+            })
+        }
+    }catch (e) {
+        console.log(e)
     }
+    
 }
 exports.importNewResult = (req, res) => {
-    console.log('Req student_result data', req.body)
-    const studentReqData = new StudentResultModel(req.body)
-  
-    if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
-      res.send(400).send({success: false, message: 'Please fill data all fields'})
-    }else {
-      console.log('Valid data')
-      StudentResultModel.importNewResult(req.body, (err, student_result) => {
-        if(err) res.send(err);
-        res.json({ status: true, message: 'Insert student_result completed', data: student_result })
-      })
+    try {
+        console.log('Req student_result data', req.body)
+        // const studentReqData = new StudentResultModel(req.body)
+    
+        if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
+            res.send(400).send({success: false, message: 'Please fill data all fields'})
+        }else {
+            console.log('Valid data')
+            StudentResultModel.importNewResult(req.body, (err, student_result) => {
+                if(err) 
+                    res.json({ status: false, message: 'failed', data: err })
+                else 
+                    res.json({ status: true, message: 'Insert student_result completed', data: student_result })
+                })
+        }
+    }catch (e) {
+        console.log(e)
     }
   }
 exports.updateStudentResult = (req, res) => {
