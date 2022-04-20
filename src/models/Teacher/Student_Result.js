@@ -34,7 +34,7 @@ Student_Result.getStudentResultById = (id, result) => {
 }
 // insert student result
 Student_Result.insertStudentResult = async (studentresultReqData, result) => {
-    await dbCon.query('SELECT * FROM student_result WHERE stu_id = ?', [studentresultReqData.stu_id], async (err, res) => {
+    await dbCon.query('SELECT * FROM student_result WHERE stu_id = ? AND sub_id = ?', [studentresultReqData.stu_id, studentresultReqData.sub_id], async (err, res) => {
         if(res.length > 0) {
             result(res, null)
             return

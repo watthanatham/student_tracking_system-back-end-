@@ -22,7 +22,6 @@ exports.getStudentById = (req, res) => {
 exports.insertNewStudent = async (req, res) => {
   try {
     // console.log('Req student data', req.body)
-    // req.body.stu_password = await bcrypt.hash(req.body.stu_password, 10)
     const studentReqData = new StudentModel(req.body)
 
     if(req.body.contructor === Object && Object.keys(req.body).length === 0) {

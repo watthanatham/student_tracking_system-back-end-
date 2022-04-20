@@ -20,15 +20,15 @@ exports.getStudentResultById = (req, res) => {
         res.send(student_result)
     })
 }
-exports.insertStudentResult = (req, res) => {
+exports.insertStudentResult = async (req, res) => {
     try {
-        console.log('Req student result data', req.body)
+        // console.log('Req student result data', req.body)
         const studentresultReqData = new StudentResultModel(req.body)
 
         if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
             res.send(400).send({success: false, message: 'Please fill data all fields'})
         }else {
-            console.log('Valid data')
+            // console.log('Valid data')
             StudentResultModel.insertStudentResult(studentresultReqData, (err, student_result) => {
                 if(err)
                     res.json({ status: false, message: 'failed', data: err })
@@ -39,11 +39,10 @@ exports.insertStudentResult = (req, res) => {
     }catch (e) {
         console.log(e)
     }
-    
 }
 exports.importNewResult = (req, res) => {
     try {
-        console.log('Req student_result data', req.body)
+        // console.log('Req student_result data', req.body)
         // const studentReqData = new StudentResultModel(req.body)
     
         if(req.body.contructor === Object && Object.keys(req.body).length === 0) {
