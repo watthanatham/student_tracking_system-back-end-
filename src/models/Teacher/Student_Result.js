@@ -53,7 +53,9 @@ Student_Result.insertStudentResult = async (studentresultReqData, result) => {
 }
 Student_Result.importNewResult = async (studentresultReqData, result) => {
     const resultcheck = studentresultReqData.map(x => x[0])
-    await dbCon.query('SELECT * FROM student_result WHERE stu_id IN(?)', [resultcheck], async (err, res) => {
+    const checksub = studentresultReqData.map(x => x[1])
+    await dbCon.query('SELECT * FROM student_result WHERE stu_id IN(?) AND sub_id IN(?)', [resultcheck, checksub], async (err, res) => {
+        console.log(res)
         if(res.length > 0) {
             result(res, null)
             return
