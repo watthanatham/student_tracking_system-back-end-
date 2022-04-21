@@ -44,7 +44,7 @@ Subject_Type.createNewType = (sub_typeReqdata, result) => {
 }
 // update subject_type
 Subject_Type.updateSubjectType = (id, sub_typeReqdata, result) => {
-  dbCon.query('UPDATE subject_type SET st_credit=? WHERE st_id=?', [sub_typeReqdata.st_credit, id], (err, res) => {
+  dbCon.query('UPDATE subject_type SET st_name=?,st_credit=? WHERE st_id=?', [sub_typeReqdata.st_name,sub_typeReqdata.st_credit, id], (err, res) => {
     if(err) {
       console.log('Error while update data')
       result(null, err)

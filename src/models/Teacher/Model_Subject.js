@@ -84,7 +84,7 @@ Model_Subject.getReportforFail = (stu_year, course_id, module_id, sub_id, result
   })
 }
 Model_Subject.updateModule = (id, moduleReqdata, result) => {
-  dbCon.query('UPDATE module SET module_credit=? WHERE module_id = ?', [moduleReqdata.module_credit, id], (err, res) => {
+  dbCon.query('UPDATE module SET module_name=?,module_credit=? WHERE module_id = ?', [moduleReqdata.module_name, moduleReqdata.module_credit, id], (err, res) => {
     if(err) {
       console.log('Error while update data')
       result(null, err)
